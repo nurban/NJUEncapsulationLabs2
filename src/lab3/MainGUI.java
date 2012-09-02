@@ -22,7 +22,7 @@ import javax.swing.*;
 
 /**
  * 
- * @Revisor nurban
+ * @Revised by Neil Urban
  */
 
 public class MainGUI extends javax.swing.JFrame implements ActionListener {

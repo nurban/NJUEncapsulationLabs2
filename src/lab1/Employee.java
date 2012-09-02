@@ -13,7 +13,7 @@ import java.util.Date;
 
 /**
  * 
- * @Revisor nurban
+ * @Revised by Neil Urban
  */
 
 public class Employee {

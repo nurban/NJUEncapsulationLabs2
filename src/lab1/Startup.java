@@ -11,7 +11,7 @@ package lab1;
 
 /**
  * 
- * @Revisor nurban
+ * @Revised by Neil Urban
  */
 
 public class Startup {
