@@ -34,11 +34,14 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private int foundIndex = NOT_FOUND;
     private String partDesc;
     private double partPrice;
+    private boolean isSortable = false;
+    
+    //This objects calls the PartsData class, which simply contains the field for
+    //the array data. This GUI class can now easily access them by calling them
+    //with the use of this object.
+    PartsData data = new PartsData();
 
-    private String[] partNums = new String[10];
-    private String[] partDescs = new String[10];
-    private double[] partPrices = new double[10];
-    private int emptyRow;
+    
 
     /** Creates new form MainGUI */
     public MainGUI() {
@@ -277,7 +280,7 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
             return;
         }
 
-        if (emptyRow > 10) {
+        if (data.getEmptyRow() > 10) {
             JOptionPane.showMessageDialog(this, 
                     "Sorry, you have reach the maximum of 10 items.\n"
                     + "No more items can be saved.", "Maximum Reached", JOptionPane.WARNING_MESSAGE);
@@ -291,10 +294,10 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
             this.txtNewProdNo.requestFocus();
 
         } else {
-            partNums[emptyRow] = partNo;
-            partDescs[emptyRow] = partDesc;
-            partPrices[emptyRow] = partPrice;
-            this.emptyRow += 1;
+            data.getPartNums()[data.getEmptyRow()] = partNo;
+            data.getPartDescs()[data.getEmptyRow()] = partDesc;
+            data.getPartPrices()[data.getEmptyRow()] = partPrice;
+            data.incrementEmptyRow();
         }
 
         clearEntryFields();
@@ -304,8 +307,8 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String searchNum = txtSearchPartNo.getText();
         if (searchNum != null && searchNum.length() > 0) {
-            for (int i = 0; i < this.partNums.length; i++) {
-                if (searchNum.equalsIgnoreCase(partNums[i])) {
+            for (int i = 0; i < this.data.getPartNums().length; i++) {
+                if (searchNum.equalsIgnoreCase(data.getPartNums()[i])) {
                     foundIndex = i;
                     break;
                 }
@@ -315,9 +318,9 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                     "Part Number not found. Please try again.",
                     "Not Found", JOptionPane.WARNING_MESSAGE);
            } else {
-                txtCurProdNo.setText(partNums[foundIndex]);
-                txtCurDesc.setText(partDescs[foundIndex]);
-                txtCurPrice.setText("" + partPrices[foundIndex]);
+                txtCurProdNo.setText(data.getPartNums()[foundIndex]);
+                txtCurDesc.setText(data.getPartDescs()[foundIndex]);
+                txtCurPrice.setText("" + data.getPartPrices()[foundIndex]);
            }
         } else {
                 JOptionPane.showMessageDialog(this,
@@ -329,6 +332,7 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
 
     private void btnDisplayListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayListActionPerformed
         displayList();
+        isSortable = true;
     }//GEN-LAST:event_btnDisplayListActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -337,9 +341,9 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
                     "Part Number not found. Please try again.",
                     "Search Failure", JOptionPane.WARNING_MESSAGE);
         } else {
-            partNums[foundIndex] = txtCurProdNo.getText();
-            partDescs[foundIndex] = txtCurDesc.getText();
-            partPrices[foundIndex] = Double.parseDouble(txtCurPrice.getText());
+            data.getPartNums()[foundIndex] = txtCurProdNo.getText();
+            data.getPartDescs()[foundIndex] = txtCurDesc.getText();
+            data.getPartPrices()[foundIndex] = Double.parseDouble(txtCurPrice.getText());
             displayList();
             JOptionPane.showMessageDialog(this,
                 "Part updated successfully!",
@@ -355,35 +359,17 @@ public class MainGUI extends javax.swing.JFrame implements ActionListener {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         listProducts.setText(""); // clear list
         listProducts.append("Part\tDesc\t\tPrice\n====\t====\t\t=====\n");
-        for (int i = 0 ; i < emptyRow; i++) {
-            String rLine = partNums[i] + "\t"
-                    + partDescs[i] + "\t\t" + nf.format(partPrices[i]) + "\n";
+        for (int i = 0 ; i < data.getEmptyRow(); i++) {
+            String rLine = data.getPartNums()[i] + "\t"
+                    + data.getPartDescs()[i] + "\t\t" + nf.format(data.getPartPrices()[i]) + "\n";
             listProducts.append(rLine);
         }
     }
 
     // Sort by partNumber
     private void sortList() {
-        // Only perform the sort if we have records
-        if(emptyRow > 0) {
-            // Bubble sort routine adapted from sample in text book...
-            // Make sure the operations are peformed on all 3 arrays!
-            for(int passNum = 1; passNum < emptyRow; passNum++) {
-                for(int i = 1; i <= emptyRow-passNum; i++) {
-                    String temp = "";
-                    temp += partPrices[i-1];
-                    partPrices[i-1] = partPrices[i];
-                    partPrices[i] = Double.parseDouble(temp);
-
-                    temp = partNums[i-1];
-                    partNums[i-1] = partNums[i];
-                    partNums[i] = temp;
-
-                    temp = partDescs[i-1];
-                    partDescs[i-1] = partDescs[i];
-                    partDescs[i] = temp;
-                }
-            }
+        if (isSortable) {
+           data.sortData();
             // Once it's sorted, display in the list box
             displayList();
         } else {

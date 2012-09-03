@@ -13,69 +13,74 @@ public class GameCharacter {
     private String lastName;
     private String species;
     private String planet; //What planet your character is from
-    private String gender; //M or F
+    private String gender; //Male or Female
     
     //Setter for firstName
-    private void setFirstName(String first) {
+    public void setFirstName(String first) {
+        //Insert Parameter Valdiation Here.
         this.firstName = first;
     }
     
     //Setter for lastName
-    private void setLastName(String last) {
+    public void setLastName(String last) {
+        //Insert Parameter Valdiation Here.
         this.lastName = last;
     }
     
     //Setter for species
-    private void setSpecies(String species) {
+    public void setSpecies(String species) {
+        //Insert Parameter Valdiation Here.
         this.species = species;
     }
     
     //Setter for planet
-    private void setPlanet(String planet) {
+    public void setPlanet(String planet) {
+        //Insert Parameter Valdiation Here.
         this.planet = planet;
     }
     
     //Setter for gender
-    private void setGender(String gender) {
+    public void setGender(String gender) {
+        //Insert Parameter Valdiation Here.
         this.gender = gender;
     }
 
     /**
      * @return the firstName
      */
-    private String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
     /**
      * @return the lastName
      */
-    private String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
     /**
      * @return the species
      */
-    private String getSpecies() {
+    public String getSpecies() {
         return species;
     }
 
     /**
      * @return the planet
      */
-    private String getPlanet() {
+    public String getPlanet() {
         return planet;
     }
 
     /**
      * @return the gender
      */
-    private String getGender() {
+    public String getGender() {
         return gender;
     }
     
-    //Public method which calls private helper methods.
+    //Public method which calls private helper methods to generate character.
     public void generateCharacter() {
         getFirstName();
         getLastName();

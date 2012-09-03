@@ -14,25 +14,30 @@ public class GameWorld {
     private String worldSize; //Small, Medium, Large
     private boolean containsDungeons; //true if world contains explorable dungeouns; false if not.
     private boolean containsEnemyBases; //true if world contains armed enemy bases; false if not.
-
+    
+    //GameCharacter object, used in calling generatedCharacter method as part of the generateWorld method.
+    //(occurs after world has been generated)
+    GameCharacter character = new GameCharacter();
+    
     /**
      * @return the terrain
      */
-    private String getTerrain() {
+    public String getTerrain() {
         return terrain;
     }
 
     /**
      * @param terrain the terrain to set
      */
-    private void setTerrain(String terrain) {
+    public void setTerrain(String terrain) {
+        //Insert Parameter Valdiation Here.
         this.terrain = terrain;
     }
 
     /**
      * @return the season
      */
-    private String getSeason() {
+    public String getSeason() {
         return season;
     }
 
@@ -40,41 +45,44 @@ public class GameWorld {
      * @param season the season to set
      */
     public void setSeason(String season) {
+        //Insert Parameter Valdiation Here.
         this.season = season;
     }
 
     /**
      * @return the worldSize
      */
-    private String getWorldSize() {
+    public String getWorldSize() {
         return worldSize;
     }
 
     /**
      * @param worldSize the worldSize to set
      */
-    private void setWorldSize(String worldSize) {
+    public void setWorldSize(String worldSize) {
+        //Insert Parameter Valdiation Here.
         this.worldSize = worldSize;
     }
 
     /**
      * @return the containsDungeons
      */
-    private boolean isContainsDungeons() {
+    public boolean isContainsDungeons() {
         return containsDungeons;
     }
 
     /**
      * @param containsDungeons the containsDungeons to set
      */
-    private void setContainsDungeons(boolean containsDungeons) {
+    public void setContainsDungeons(boolean containsDungeons) {
+        //Insert Parameter Valdiation Here.
         this.containsDungeons = containsDungeons;
     }
 
     /**
      * @return the containsEnemyBases
      */
-    private boolean isContainsEnemyBases() {
+    public boolean isContainsEnemyBases() {
         return containsEnemyBases;
     }
 
@@ -82,6 +90,7 @@ public class GameWorld {
      * @param containsEnemyBases the containsEnemyBases to set
      */
     private void setContainsEnemyBases(boolean containsEnemyBases) {
+        //Insert Parameter Valdiation Here.
         this.containsEnemyBases = containsEnemyBases;
     }
     
@@ -91,5 +100,7 @@ public class GameWorld {
         getSeason();
         isContainsDungeons();
         isContainsEnemyBases();
+        character.generateCharacter();  //includes character generation,
+                                        //which occurs after the game world has been generated.
 }
 }

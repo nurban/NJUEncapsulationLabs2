@@ -20,7 +20,7 @@ public class Startup {
         
         //Calls Day method in class Employee -- this method encapsulates the other helper methods
         //by calling them in the order that they are needed to occur.
-        employee.Day();
+        employee.startFirstDay(""); // ("" because passing a string is required for moveIntoCubicle method
         
         //Statement which prints out the employee's status by calling the getStatus method
         //from the Employee class.

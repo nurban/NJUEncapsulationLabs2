@@ -36,6 +36,8 @@ public class Employee {
 
     // Assume this must be performed first
     private void meetWithHrForBenefitAndSalryInfo() {
+        
+        //Validate Parameter here.
         metWithHr = true;
     }
 
@@ -75,7 +77,7 @@ public class Employee {
     }
     
     //This method calls all other private helper methods in this class.
-    public void Day() {
+    public void startFirstDay(String cubeId) {
         this.meetWithHrForBenefitAndSalryInfo();
         this.meetDepartmentStaff();
         this.reviewDeptPolicies();

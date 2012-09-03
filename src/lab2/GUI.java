@@ -24,6 +24,7 @@ public class GUI {
      * @param InputIsKeyboardAndMouse the InputIsKeyboardAndMouse to set
      */
     private void setInputIsKeyboardAndMouse(boolean InputIsKeyboardAndMouse) {
+        //Insert Parameter Valdiation Here.
         this.InputIsKeyboardAndMouse = InputIsKeyboardAndMouse;
     }
     
@@ -38,6 +39,7 @@ public class GUI {
      * @param resolution the resolution to set
      */
     private void setResolution(String resolution) {
+        //Insert Parameter Valdiation Here.
         this.resolution = resolution;
     }
 
@@ -52,6 +54,7 @@ public class GUI {
      * @param fontSize the fontSize to set
      */
     private void setFontSize(int fontSize) {
+        //Insert Parameter Valdiation Here.
         this.fontSize = fontSize;
     }
     

@@ -12,49 +12,51 @@ public class Game {
     private int difficulty; // 1 is easy; 2 is medium; 3 is hard.
     private boolean isMultiplayer;  //true = multiplayer; false = single player.
     
-    GameCharacter c = new GameCharacter();
     GameWorld w = new GameWorld();
     GUI g = new GUI();
 
     /**
      * @return the difficulty
+     * public so that it can be set from the startup.
      */
-    private int getDifficulty() {
+    public int getDifficulty() {
         return difficulty;
     }
 
     /**
      * @param difficulty the difficulty to set
      */
-    private void setDifficulty(int difficulty) {
+    public void setDifficulty(int difficulty) {
+        //Insert Parameter Valdiation Here.
         this.difficulty = difficulty;
     }
 
     /**
      * @return the isMultiplayer
      */
-    private boolean isIsMultiplayer() {
+    public boolean isIsMultiplayer() {
         return isMultiplayer;
     }
 
     /**
      * @param isMultiplayer the isMultiplayer to set
      */
-    private void setIsMultiplayer(boolean isMultiplayer) {
+    public void setIsMultiplayer(boolean isMultiplayer) {
+        //Insert Parameter Valdiation Here.
         this.isMultiplayer = isMultiplayer;
     }
     
-    //private method which encapsulates the 2 other private helper methods. 
+    //private helper method which encapsulates the 2 other private helper methods. 
     private void establishSettings(int difficulty, boolean isMultiplayer) {
         setDifficulty(difficulty);
         setIsMultiplayer(isMultiplayer);
     }
     
+    //public method which starts the game. (to be called by the Starup class to initialize the game.)
     public void startGame() {
         g.generateGUI();
         establishSettings(difficulty, isMultiplayer);
-        c.generateCharacter();
-        w.generateWorld();
+        w.generateWorld();  //calling generateWorld also calls the generateCharacter method.
         
     }
 }
